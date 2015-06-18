@@ -28,11 +28,20 @@
 
 -include("wpool.hrl").
 
+-ifdef(namespaced_queues).
+-record(state, {wpool                 :: wpool:name(),
+                clients               :: queue:queue(),
+                workers               :: sets:set(),
+                born = os:timestamp() :: erlang:timestamp()
+               }).
+-else.
 -record(state, {wpool                 :: wpool:name(),
                 clients               :: queue(),
                 workers               :: set(),
                 born = os:timestamp() :: erlang:timestamp()
                }).
+-endif.
+
 -type state() :: #state{}.
 
 %%%===================================================================
