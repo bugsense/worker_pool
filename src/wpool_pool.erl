@@ -69,7 +69,7 @@ random_worker(Sup) ->
   case wpool_size(Sup) of
     undefined  -> throw(no_workers);
     Wpool_Size ->
-      _ = random:seed(now()),
+      _ = random:seed(os:timestamp()),
       worker_name(Sup, random:uniform(Wpool_Size))
   end.
 
